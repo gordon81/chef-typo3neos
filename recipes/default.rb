@@ -28,22 +28,12 @@ include_recipe "php::module_gd"
 include_recipe "php-fpm"
 include_recipe "composer"
 
-
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-
-#site_docroot = "#{node['apache']['docroot_dir']}/site-#{node['typo3']['site_name']}"
-#typo3_source_directory = "#{site_docroot}/typo3_src-#{node['typo3']['version']}"
 
 include_recipe "typo3flow::_database"
 include_recipe "typo3flow::_config"
 
-#if !node['typo3']['package'].empty?
-#  include_recipe "typo3::_package"
-#else
-#  include_recipe "typo3::_source"
-#end
-
-# create TYPO3 site / web app
+# create TYPO3 Flow web app
 Chef::Log.info "Setting up TYPO3 Flow Project \"#{node['typo3flow']['site_name']}\""
 template "generic_flow" do
   path "#{node['nginx']['dir']}/sites-available/generic_flow"
@@ -55,5 +45,8 @@ end
 
 nginx_site "generic_flow" do
 	enable true
-	notifies :reload, 'service[nginx]'
+end
+
+service "nginx" do
+  action :reload
 end

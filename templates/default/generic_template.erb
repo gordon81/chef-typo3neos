@@ -1,7 +1,7 @@
 server {
 	listen 80;
 	server_name ~^(?<project>.*)\.<%= node['typo3flow']['environment'] %>\.flow;
-	root /var/www/$project/releases/current/Web/;
+	root /var/www/$project/Web/;
 
 	index index.php index.html;
 
