@@ -8,7 +8,7 @@ An Opscode Chef cookbook to set up TYPO3.
 
 Installs TYPO3 in a given version. However, does not configure the installation (yet). The install tool will be enabled after the recipe finished and you need to configure TYPO3 yourself.
 
-A database and database user for the TYPO3 installation will be set up. 
+A database and database user for the TYPO3 installation will be set up.
 
 The TYPO3 source is downloaded as a package from <http://get.typo3.org> and put into `/usr/src`.
 
@@ -22,15 +22,17 @@ Tested on Ubuntu / Debian
 
 ### Chef
 
-Tested with Chef 10.14.2 
+Tested with Chef 10.14.2
 
 ### Cookbooks
 
-* apache2
+* nginx
 * mysql
 * database
 * php
+* php-fpm
 * cron
+* composer
 
 
 ## Attributes
@@ -60,13 +62,13 @@ Tested with Chef 10.14.2
     <td>String</td>
     <td>The site's name. Used for example in determining the folder in /var/www/.</td>
     <td><tt>typo3</tt></td>
-  </tr>  
+  </tr>
   <tr>
     <td><tt>['typo3']['use_typo3_htaccess']</tt></td>
     <td>Boolean</td>
     <td>By default the core's .htaccess file will be used. If you need to do custom modifications, you can turn that behavior off by setting this attribute to false. Is ignored when installing a site package.</td>
     <td><tt>true</tt></td>
-  </tr>  
+  </tr>
   <tr>
     <td><tt>['typo3']['server_name']</tt></td>
     <td>String</td>
@@ -111,9 +113,11 @@ Tested with Chef 10.14.2
 
 ## License and Authors
 
-Authors: [Ingo Renner](http://github.com/ingorenner) [(@irnnr)](http://twitter.com/irnnr)
+Authors: [Sebastiaan van Parijs](http://github.com/RefactoryIt) [(@van2parijs)](http://twitter.com/van2parijs)
 
-Copyright: 2013-2014, Ingo Renner
+Based on the work from: [Ingo Renner](http://github.com/ingorenner) [(@irnnr)](http://twitter.com/irnnr)
+
+Copyright: 2013-2014, Refactory.it
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
