@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+default['nginx']['default_site_enabled']   = false
+
 # General settings
 default['typo3flow']['db']['database'] = "flow-projectdb"
 default['typo3flow']['db']['user'] = "flowuser"
@@ -26,3 +28,5 @@ default['typo3flow']['db']['password'] = "flowpassword"
 default['typo3flow']['server_name'] = [node['fqdn']]
 default['typo3flow']['server_aliases'] = []
 
+default['typo3flow']['context'] = 'Development'
+default['typo3flow']['environment'] = 'dev'

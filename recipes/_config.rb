@@ -1,7 +1,7 @@
 #
 # Author:: Sebastiaan van Parijs (<office@refactory.it>)
 # Cookbook Name:: typo3flow
-# Attributes:: default
+# Attributes:: _config
 #
 # Copyright 2014, Sebastiaan van Parijs
 #
@@ -17,3 +17,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# prepare php.ini config
+cookbook_file "/etc/php5/conf.d/php_custom.ini" do
+	source "php_custom.ini"
+	mode 0655
+end
+
+template "upstream_php-fpm.conf" do
+  path "#{node['nginx']['dir']}/conf.d/fpm.conf"
+  source "upstream_php-fpm.conf.erb"
+  owner "root"
+  group "root"
+  mode 00644
+end
+
+# enable host and disable default host
+nginx_site "000-default" do
+	enable false
+end
+
+service "php5-fpm" do
+  action :start
+end

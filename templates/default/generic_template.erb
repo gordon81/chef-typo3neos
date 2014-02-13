@@ -1,0 +1,58 @@
+server {
+	listen 80;
+	server_name ~^(?<project>.*)\.<%= node['typo3flow']['environment'] %>\.flow;
+	root /var/www/$project/releases/current/Web/;
+
+	index index.php index.html;
+
+	access_log  /var/log/nginx/projects.access.log;
+	error_log  /var/log/nginx/projects.error.log;
+
+	## Disable .htaccess and other hidden files
+	location ~ /\. {
+		deny all;
+		access_log off;
+		log_not_found off;
+	}
+
+	location = /favicon.ico {
+		log_not_found off;
+		access_log off;
+	}
+
+	location = /robots.txt {
+		allow all;
+		log_not_found off;
+		access_log off;
+	}
+
+	location = /humans.txt {
+		allow all;
+		log_not_found off;
+		access_log off;
+	}
+
+	location /_Resources/Persistent/ {
+		access_log off;
+		log_not_found off;
+		expires max;
+
+		rewrite "(.{40})/.+\.(.+)" /_Resources/Persistent/$1.$2 break;
+		rewrite "([a-z0-9]+/(.+/)?[a-f0-9]{40})/.+\.(.+)" /_Resources/Persistent/$1.$2 break;
+	}
+
+	try_files $uri $uri/ /index.php?$args;
+
+	location ~ \.php$ {
+		include fastcgi_params;
+		fastcgi_pass upstream_php_fpm;
+		fastcgi_index index.php;
+
+		fastcgi_param FLOW_CONTEXT <%= node['typo3flow']['context'] %>;
+		fastcgi_param FLOW_REWRITEURLS 1;
+
+		fastcgi_split_path_info ^(.+\.php)(.*)$;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
+	}
+}

@@ -1,7 +1,7 @@
 #
 # Author:: Sebastiaan van Parijs (<office@refactory.it>)
 # Cookbook Name:: typo3flow
-# Attributes:: default
+# Attributes:: _database
 #
 # Copyright 2014, Sebastiaan van Parijs
 #
@@ -27,16 +27,16 @@ mysql_connection_info = {
 }
 
 # create the database
-mysql_database node['typo3']['db']['database'] do
+mysql_database node['typo3flow']['db']['database'] do
   connection mysql_connection_info
   action :create
 end
 
 # create database user
-mysql_database_user node['typo3']['db']['user'] do
+mysql_database_user node['typo3flow']['db']['user'] do
   connection mysql_connection_info
-  password node['typo3']['db']['password']
-  database_name node['typo3']['db']['database']
+  password node['typo3flow']['db']['password']
+  database_name node['typo3flow']['db']['database']
   privileges [:select,:update,:insert,:create,:alter,:drop,:delete]
   action :grant
 end

@@ -43,35 +43,17 @@ include_recipe "typo3flow::_config"
 #  include_recipe "typo3::_source"
 #end
 
-# create actual directories, set permissions
-#%w{
-#  fileadmin
-#  typo3conf
-#  typo3conf/ext
-#  typo3temp
-#  uploads
-#}.each do |directory|
-##  directory "#{site_docroot}/#{directory}" do
-#    owner node['apache']['user']
-#    group node['apache']['group']
-#    mode "0755"
-#    recursive true
-#  end
-#end
-
-# enable install tool
-#file "#{site_docroot}/typo3conf/ENABLE_INSTALL_TOOL" do
-#  owner node['apache']['user']
-#  group node['apache']['group']
-#  mode "0755"
-#  action :touch
-#end
-
 # create TYPO3 site / web app
-Chef::Log.info "Setting up TYPO3 site \"#{node['typo3']['site_name']}\""
-#web_app node['typo3']['site_name'] do
-#  template "typo3-web_app.conf.erb"
-#  docroot site_docroot
-#  server_name node['typo3']['server_name']
-#  server_aliases node['typo3']['server_aliases']
-#end
+Chef::Log.info "Setting up TYPO3 Flow Project \"#{node['typo3flow']['site_name']}\""
+template "generic_flow" do
+  path "#{node['nginx']['dir']}/sites-available/generic_flow"
+  source "generic_template.erb"
+  owner "root"
+  group "root"
+  mode 00755
+end
+
+nginx_site "generic_flow" do
+	enable true
+	notifies :reload, 'service[nginx]'
+end
