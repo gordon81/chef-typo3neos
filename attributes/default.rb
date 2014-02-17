@@ -1,6 +1,6 @@
 #
 # Author:: Sebastiaan van Parijs (<office@refactory.it>)
-# Cookbook Name:: typo3flow
+# Cookbook Name:: typo3neos
 # Attributes:: default
 #
 # Copyright 2014, Sebastiaan van Parijs
@@ -21,12 +21,12 @@
 default['nginx']['default_site_enabled']   = false
 
 # General settings
-default['typo3flow']['db']['database'] = "flow-projectdb"
-default['typo3flow']['db']['user'] = "flowuser"
-default['typo3flow']['db']['password'] = "flowpassword"
+default['typo3neos']['db']['database'] = "neos-projectdb"
+default['typo3neos']['db']['user'] = "neosuser"
+default['typo3neos']['db']['password'] = "neospassword"
 
-default['typo3flow']['server_name'] = [node['fqdn']]
-default['typo3flow']['server_aliases'] = []
+default['typo3neos']['server_name'] = [node['fqdn']]
+default['typo3neos']['server_aliases'] = []
 
-default['typo3flow']['context'] = 'Development'
-default['typo3flow']['environment'] = 'dev'
+default['typo3neos']['context'] = 'Development'
+default['typo3neos']['environment'] = 'dev'

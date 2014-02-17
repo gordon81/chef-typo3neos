@@ -1,16 +1,10 @@
-# TYPO3 Flow Cookbook
+# TYPO3 Neos Cookbook
 
-An Opscode Chef cookbook to set up TYPO3 Flow.
+An Opscode Chef cookbook to set up TYPO3 Neos.
 
 ## Usage
 
-### typo3flow::default
-
-Installs all pre-requirements for flow.
-
-A database and database user for the TYPO3 Flow installation will be set up.
-
-Then it will enable a nginx template to start working with TYPO3 Flow after a manual installation.
+This cookbook is used for development purposes only, it might in the future become more stable a useful for extended use cases.
 
 ## Requirements
 
@@ -33,9 +27,6 @@ Tested with Chef 10.14.2
 * composer
 
 ## Attributes
-
-Will be added when cookbook is more stable.
-
 
 ## Contributing
 

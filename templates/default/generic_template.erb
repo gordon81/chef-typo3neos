@@ -1,6 +1,6 @@
 server {
 	listen 80;
-	server_name ~^(?<project>.*)\.<%= node['typo3flow']['environment'] %>\.flow;
+	server_name ~^(?<project>.*)\.<%= node['typo3neos']['environment'] %>\.neos;
 	root /var/www/$project/Web/;
 
 	index index.php index.html;
@@ -48,8 +48,8 @@ server {
 		fastcgi_pass upstream_php_fpm;
 		fastcgi_index index.php;
 
-		fastcgi_param FLOW_CONTEXT <%= node['typo3flow']['context'] %>;
-		fastcgi_param FLOW_REWRITEURLS 1;
+		fastcgi_param neos_CONTEXT <%= node['typo3neos']['context'] %>;
+		fastcgi_param neos_REWRITEURLS 1;
 
 		fastcgi_split_path_info ^(.+\.php)(.*)$;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;

@@ -1,6 +1,6 @@
 #
 # Author:: Sebastiaan van Parijs (<office@refactory.it>)
-# Cookbook Name:: typo3flow
+# Cookbook Name:: typo3neos
 # Attributes:: default
 #
 # Copyright 2014, Sebastiaan van Parijs
@@ -30,20 +30,21 @@ include_recipe "composer"
 
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-include_recipe "typo3flow::_database"
-include_recipe "typo3flow::_config"
+include_recipe "typo3neos::_database"
+include_recipe "typo3neos::_config"
 
-# create TYPO3 Flow web app
-Chef::Log.info "Setting up TYPO3 Flow Project \"#{node['typo3flow']['site_name']}\""
-template "generic_flow" do
-  path "#{node['nginx']['dir']}/sites-available/generic_flow"
+
+# create TYPO3 site / web app
+Chef::Log.info "Setting up TYPO3 neos Project \"#{node['typo3neos']['site_name']}\""
+template "generic_neos" do
+  path "#{node['nginx']['dir']}/sites-available/generic_neos"
   source "generic_template.erb"
   owner "root"
   group "root"
   mode 00755
 end
 
-nginx_site "generic_flow" do
+nginx_site "generic_neos" do
 	enable true
 end
 

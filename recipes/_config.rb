@@ -1,6 +1,6 @@
 #
 # Author:: Sebastiaan van Parijs (<office@refactory.it>)
-# Cookbook Name:: typo3flow
+# Cookbook Name:: typo3neos
 # Attributes:: _config
 #
 # Copyright 2014, Sebastiaan van Parijs
@@ -22,6 +22,11 @@
 cookbook_file "/etc/php5/conf.d/php_custom.ini" do
 	source "php_custom.ini"
 	mode 0655
+end
+
+cookbook_file "/etc/php5/fpm/pool.d/www.conf" do
+	source "www.conf"
+	mode 0644
 end
 
 template "upstream_php-fpm.conf" do
